@@ -155,6 +155,7 @@
 		if ((verticalOut && verticalIn && outConnectorX === inConnectorX) || (!verticalOut && !verticalIn && outConnectorY === inConnectorY)) {
 			if (!verticalOut && !verticalIn && outConnectorY === inConnectorY && outConnectorX > inConnectorX) {
 				// outConnector point and inConnector point lying on the same horizontal grid line and outConnector point lies to the right of inConnector point.
+				//1
 				return [
 					{ x: outConnectorX, y: outConnectorY },
 					{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -164,6 +165,7 @@
 					{ x: inConnectorX, y: inConnectorY },
 				];
 			} else {
+				//2
 				return [
 					{ x: outConnectorX, y: outConnectorY },
 					{ x: inConnectorX, y: inConnectorY },
@@ -173,6 +175,7 @@
 
 		// Handle L-shaped paths
 		if ((verticalOut && !verticalIn && outConnectorX === inConnectorX) || (!verticalOut && verticalIn && outConnectorY === inConnectorY)) {
+			//3
 			return [
 				{ x: outConnectorX, y: outConnectorY },
 				{ x: inConnectorX, y: inConnectorY },
@@ -190,6 +193,7 @@
 				if (-4 * gridSpacing <= outConnectorX - inConnectorX && outConnectorX - inConnectorX < -3 * gridSpacing) {
 					//outConnector point lies on the vertical grid line 4 units to the left of inConnector point point.
 
+					//4
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -201,7 +205,9 @@
 				if (-3 * gridSpacing <= outConnectorX - inConnectorX && outConnectorX - inConnectorX <= -1 * gridSpacing) {
 					// outConnector point lying on vertical grid lines 3 and 2 units to the left of inConnector point.
 					if (-2 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= -1 * gridSpacing) {
-						return [
+						
+						//5
+						 return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing },
 							{ x: outConnectorX + gridSpacing, y: outConnectorY - gridSpacing },
@@ -209,6 +215,7 @@
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else if (-1 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= 0 * gridSpacing) {
+						//6
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -218,6 +225,7 @@
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else {
+						//7
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -232,6 +240,7 @@
 					// outConnector point lying on vertical grid line 1 units to the left of inConnector point.
 					if (-2 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= -1 * gridSpacing) {
 						// outConnector point lying on horizontal grid line 1 unit above inConnector point.
+						//8
 						return [
 							{ x: outConnectorX, y: outConnectorY + 4 * lineWidth },
 							{ x: outConnectorX + gridSpacing, y: outConnectorY + 4 * lineWidth },
@@ -240,11 +249,13 @@
 						];
 					} else if (-1 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= 0 * gridSpacing) {
 						// outConnector point lying on the same horizontal grid line as inConnector point.
+						//9
 						return [
 							{ x: outConnectorX, y: outConnectorY + 5 * lineWidth },
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else {
+						//10
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing },
@@ -257,6 +268,7 @@
 					}
 				} else {
 					const midX = (inConnectorX + outConnectorX) / 2 + (((inConnectorX + outConnectorX) / 2) % gridSpacing);
+					//11
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -271,6 +283,7 @@
 					// outConnector point lying on vertical grid line 1 unit to the left of inConnector point.
 					if (0 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= 2 * gridSpacing) {
 						//outConnector point lying on the horizontal grid lines 1 and 2 units below the inConnector point.
+						//12
 						return [
 							{ x: outConnectorX, y: outConnectorY + 4 * lineWidth },
 							{ x: outConnectorX - gridSpacing, y: outConnectorY + 4 * lineWidth },
@@ -279,6 +292,7 @@
 						];
 					} else {
 						const midY = (inConnectorY + outConnectorY) / 2 - (((inConnectorY + outConnectorY) / 2) % gridSpacing);
+						//13
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: midY },
@@ -288,6 +302,7 @@
 						];
 					}
 				} else {
+					//14
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: inConnectorY },
@@ -303,6 +318,7 @@
 
 				if (-2 * gridSpacing < outConnectorY - inConnectorY && outConnectorY - inConnectorY <= -1 * gridSpacing) {
 					// outConnector point lying on horizontal grid line 1 unit above inConnector point.
+					//15
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -313,6 +329,7 @@
 					];
 				} else if (-1 * gridSpacing < outConnectorY - inConnectorY && outConnectorY - inConnectorY <= 0 * gridSpacing) {
 					// outConnector point lying on the same horizontal grid line as inConnector point.
+					//16
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - 2 * gridSpacing + 5.5 * lineWidth },
@@ -323,6 +340,7 @@
 					];
 				} else if (gridSpacing <= outConnectorX - inConnectorX && outConnectorX - inConnectorX <= 3 * gridSpacing) {
 					// outConnector point lying on vertical grid lines 1 and 2 units to the right of inConnector point.
+					//17
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -334,6 +352,7 @@
 					];
 				} else {
 					const midX = (inConnectorX + outConnectorX) / 2 + (((inConnectorX + outConnectorX) / 2) % gridSpacing);
+					//18
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -349,6 +368,7 @@
 				if (outConnectorY - inConnectorY <= gridSpacing) {
 					//outConnector point lies on the horizontal grid line 1 unit below the inConnector Point
 					if (0 <= outConnectorX - inConnectorX && outConnectorX - inConnectorX <= 13 * gridSpacing) {
+						//19
 						return [
 							{ x: outConnectorX, y: outConnectorY + 6 * lineWidth },
 							{ x: inConnectorX - 2 * gridSpacing, y: outConnectorY + 6 * lineWidth },
@@ -356,6 +376,7 @@
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else if (13 < outConnectorX - inConnectorX && outConnectorX - inConnectorX <= 18 * gridSpacing) {
+						//20
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -367,6 +388,7 @@
 						];
 					} else {
 						const midX = (inConnectorX + outConnectorX) / 2 + (((inConnectorX + outConnectorX) / 2) % gridSpacing);
+						//21
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -381,6 +403,7 @@
 					// outConnector point lies on the horizontal grid line 2 units below outConnector point.
 
 					if (0 <= outConnectorX - inConnectorX && outConnectorX - inConnectorX <= 13 * gridSpacing) {
+						//22
 						return [
 							{ x: outConnectorX, y: outConnectorY + 5 * lineWidth },
 							{ x: inConnectorX - 2 * gridSpacing + lineWidth, y: outConnectorY + 5 * lineWidth },
@@ -389,6 +412,7 @@
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else if (13 < outConnectorX - inConnectorX && outConnectorX - inConnectorX <= 18 * gridSpacing) {
+						//23
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -400,6 +424,7 @@
 						];
 					} else {
 						const midX = (inConnectorX + outConnectorX) / 2 + (((inConnectorX + outConnectorX) / 2) % gridSpacing);
+						//24
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -414,6 +439,7 @@
 
 				if (outConnectorY - inConnectorY <= 4 * gridSpacing) {
 					//0 to 4 units below the outConnector Point
+					//25
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: outConnectorY - gridSpacing + 5.5 * lineWidth },
@@ -423,6 +449,7 @@
 					];
 				} else {
 					const midY = (inConnectorY + outConnectorY) / 2 - (((inConnectorY + outConnectorY) / 2) % gridSpacing);
+					//26
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX, y: midY },
@@ -440,6 +467,7 @@
 				if (outConnectorX < inConnectorX) {
 					// outConnectorX lies to the left of inConnectorX
 
+					//27
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: inConnectorX, y: outConnectorY },
@@ -451,6 +479,7 @@
 						if (0 <= outConnectorX - inConnectorX && outConnectorX - inConnectorX <= gridSpacing) {
 							// outConnector point directly below inConnector point
 
+							//28
 							return [
 								{ x: outConnectorX, y: outConnectorY },
 								{ x: inConnectorX + gridSpacing, y: outConnectorY },
@@ -460,6 +489,7 @@
 							];
 						} else {
 							// outConnector point lies below inConnector point and strictly to the right of inConnector Point.
+							//29
 							return [
 								{ x: outConnectorX, y: outConnectorY },
 								{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -469,6 +499,7 @@
 							];
 						}
 					} else {
+						//30
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -484,6 +515,7 @@
 					// edge case: outConnector point lying on vertical grid lines ranging from 4 units to left to 5 units to right of inConnector point.
 
 					if (-1 * gridSpacing < inConnectorX - outConnectorX && inConnectorX - outConnectorX < 4 * gridSpacing) {
+						//31
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -494,6 +526,7 @@
 							{ x: inConnectorX, y: inConnectorY },
 						];
 					} else {
+						//32
 						return [
 							{ x: outConnectorX, y: outConnectorY },
 							{ x: inConnectorX + 8 * gridSpacing, y: outConnectorY },
@@ -506,6 +539,7 @@
 				} else if (4 * gridSpacing < inConnectorX - outConnectorX) {
 					// left of edge case: outConnector point lying on vertical grid lines more than 4 units to left of inConnector point.
 					const midX = (inConnectorX + outConnectorX) / 2 + (((inConnectorX + outConnectorX) / 2) % gridSpacing);
+					//33
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: midX - 2 * lineWidth, y: outConnectorY },
@@ -516,6 +550,7 @@
 				} else if (6 * gridSpacing > inConnectorX - outConnectorX) {
 					// right of edge case: outConnector point lying on the vertical grid lines more than 5 units to right of inConnector point.
 
+					//34
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX + gridSpacing - 2 * lineWidth, y: outConnectorY },
@@ -529,6 +564,7 @@
 			// Both horizontal - use horizontal middle point
 			// When inConnector point is one of the two closest diagonally opposite points.
 			if (0 <= inConnectorX - outConnectorX && inConnectorX - outConnectorX <= gridSpacing && inConnectorY - outConnectorY >= -1 * gridSpacing && inConnectorY - outConnectorY <= gridSpacing) {
+				//35
 				return [
 					{ x: outConnectorX - 2 * lineWidth, y: outConnectorY },
 					{ x: outConnectorX - 2 * lineWidth, y: inConnectorY },
@@ -540,6 +576,7 @@
 			else if (-1 * gridSpacing <= outConnectorY - inConnectorY && outConnectorY - inConnectorY <= gridSpacing && outConnectorX > inConnectorX) {
 				if (inConnectorY < outConnectorY) {
 					//horizontal line above outConnectorY
+					//36
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -550,6 +587,7 @@
 					];
 				} else {
 					// horizontal line below outConnectorY
+					//37
 					return [
 						{ x: outConnectorX, y: outConnectorY },
 						{ x: outConnectorX + gridSpacing, y: outConnectorY },
@@ -562,6 +600,7 @@
 			} else if (outConnectorX > inConnectorX - gridSpacing) {
 				// outConnector point to the right of inConnector point
 				const midY = (inConnectorY + outConnectorY) / 2 + (((inConnectorY + outConnectorY) / 2) % gridSpacing);
+				//38
 				return [
 					{ x: outConnectorX, y: outConnectorY },
 					{ x: outConnectorX + gridSpacing - 2 * lineWidth, y: outConnectorY },
@@ -573,6 +612,7 @@
 			}
 			// when inConnector point lies on the vertical grid line two units to the right of outConnector point.
 			else if (gridSpacing <= inConnectorX - outConnectorX && inConnectorX - outConnectorX <= 2 * gridSpacing) {
+				//39
 				return [
 					{ x: outConnectorX, y: outConnectorY },
 					{ x: outConnectorX + gridSpacing - 2 * lineWidth, y: outConnectorY },
@@ -582,6 +622,7 @@
 			} else {
 				const midX = (outConnectorX + inConnectorX) / 2 + (((outConnectorX + inConnectorX) / 2) % gridSpacing);
 
+				//40
 				return [
 					{ x: outConnectorX, y: outConnectorY },
 					{ x: midX - lineWidth, y: outConnectorY },
